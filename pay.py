@@ -59,49 +59,65 @@ class Grade:
         return self.get_consolidated() + self.twenty_percents()
 
     def get_taxable_income(self):
-        return self.get_annual_gross() - self.get_consolidated_relief() - self.get_pension_employees()
-
+        return (
+            self.get_annual_gross() 
+            - self.get_consolidated_relief() 
+            - self.get_pension_employees()
+    )
+    """  
+        ----------------------------------------------------------------------------------------------------------
+        THis Part of the code calculate for the Payee of employee according to the New Finance act
+        first #300,000 == 7%
+        next #300,000 == 11%
+        next #500,000 == 15%
+        next #500,000 == 19%
+        next #1,600,000 == 21%
+        above #3,200,000 == 24%
+        ----------------------------------------------------------------------------------------------------------
+    """
+    # calculate for employee who earn #30,000 and below who are not eligible for Income tax deduction
     def first_taxable(self):
         if self.get_taxable_income() <= 88000:
             return 0
 
-
+    # calculate for the first #300,000:00 or less of taxable income
     def second_taxable(self):
         if self.get_taxable_income() < 300000:
             return (self.get_taxable_income()) * 7 / 100
         elif self.get_taxable_income() >= 300000:
             return 300000 * 7 / 100
 
-
+    # calculate for the second #300,000:00 or less of taxable income
     def third_taxable(self):
         if (self.get_taxable_income() - 300000) >= 300000:
             return 300000 * 11 / 100
-
+    
         elif (self.get_taxable_income() - 300000) <= 300000:
             return (self.get_taxable_income() - 300000) * 11 / 100
 
-
+    # calculate for taxable income reminning after the #600,000 deduction, #500,000:00 or less of taxable income
     def fourth_taxable(self):
         if (self.get_taxable_income() - 600000) >= 500000:
             return 500000 * 15 / 100
-
+    
         elif (self.get_taxable_income() - 600000) <= 500000:
             return (self.get_taxable_income() - 600000) * 15 / 100
 
-
+    # calculate for taxable income reminning after the #1,100,000 deduction, second #500,000:00 or less of taxable income
     def fifth_taxable(self):
         if self.get_taxable_income() - 1100000 >= 500000:
             return 500000 * 19 / 100
         elif (self.get_taxable_income() - 1100000) < 500000:
             return (self.get_taxable_income() - 1100000) * 19 / 100
 
+    # calculate for taxable income reminning after the #1,600,000 deduction, #1,600,000:00 or less of taxable income
     def sixth_taxable(self):
         if self.get_taxable_income() - 1600000 >= 1600000:
             return 1600000 * 21 / 100
 
         elif (self.get_taxable_income() - 1600000) < 1600000:
             return (self.get_taxable_income() - 1600000) * 21 / 100
-
+    # calculate for taxable income reminning after the #3,200,000 deduction, #3,200,000:00 or less of taxable income
     def seventh_taxable(self):
         if self.get_taxable_income() - 3200000 > 3200000:
             return 3200000 * 24 / 100
