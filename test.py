@@ -6,9 +6,9 @@ emp_gross = int(input("Enter Employee gross: "))
 
 def get_emp_pay():
     grade = Grade(name=emp_name, gross=emp_gross)
-    annual_gross = grade.get_annual_gross()
+    annual_gross = grade.get_net_pay_monthly()
     payee = grade.payee_logic()
 
-    return f"{annual_gross} and {payee}"
+    return f"Dear {emp_name} your salary for the month is {annual_gross}"
 
 print(get_emp_pay())
