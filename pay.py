@@ -169,8 +169,3 @@ class Grade:
     def get_net_pay_monthly(self) -> float:
         return self.get_net_pay_annual() / 12
 
-emp = Grade("zayyad", 300000)
-print(emp.payee_logic())
-print(emp.get_net_pay_annual())
-print(emp.get_net_pay_monthly())
-print(emp.__doc__)
