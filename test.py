@@ -1,14 +1,12 @@
 from pay import Grade
 
 
-emp_name = input('Enter your Name: ')
-emp_gross = int(input("Enter Employee gross: "))
-
-def get_emp_pay():
-    grade = Grade(name=emp_name, gross=emp_gross)
+def get_emp_pay(name, gross):
+    grade = Grade(name=name, gross=gross)
     annual_gross = grade.get_net_pay_monthly()
     payee = grade.payee_logic()
 
-    return f"Dear {emp_name} your salary for the month is {annual_gross}"
+    return f"Dear {name} your salary for the month is #{annual_gross:,.2f}K and your PAYEE for the month is #{payee / 12:,.2f}K"
 
-print(get_emp_pay())
+print(get_emp_pay("zayyad", 500000))
+
